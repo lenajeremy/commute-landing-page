@@ -38,14 +38,3 @@ gsap.to('.marquee', {
   ease: 'linear',
 })
 
-gsap.from('.section-3 .heading', {
-  scrollTrigger: {
-    trigger: '.section-3',
-    start: '-300px',
-    scrub: true,
-  },
-  y: 400,
-  opacity: 0,
-  stagger: true,
-  lineHeight: '2rem'
-})

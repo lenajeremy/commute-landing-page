@@ -601,17 +601,6 @@ tl.from(".hero button", {
     duration: 10,
     ease: "linear"
 });
-(0, _gsapDefault.default).from(".section-3 .heading", {
-    scrollTrigger: {
-        trigger: ".section-3",
-        start: "-300px",
-        scrub: true
-    },
-    y: 400,
-    opacity: 0,
-    stagger: true,
-    lineHeight: "2rem"
-});
 
 },{"./utils":"en4he","gsap":"fPSuC","gsap/ScrollTrigger":"7wnFk","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"en4he":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");

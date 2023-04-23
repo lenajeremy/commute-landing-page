@@ -238,16 +238,16 @@ img, video {
   margin-bottom: 3rem;
 }
 
+.mb-24 {
+  margin-bottom: 6rem;
+}
+
 .flex {
   display: flex;
 }
 
 .grid {
   display: grid;
-}
-
-.h-screen {
-  height: 100vh;
 }
 
 .min-h-screen {
@@ -268,6 +268,10 @@ img, video {
 
 .w-screen {
   width: 100vw;
+}
+
+.grid-cols-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
 .place-items-center {
@@ -350,6 +354,11 @@ img, video {
   padding-bottom: 5rem;
 }
 
+.py-28 {
+  padding-top: 7rem;
+  padding-bottom: 7rem;
+}
+
 .pl-24 {
   padding-left: 6rem;
 }
@@ -386,12 +395,8 @@ img, video {
   font-weight: 300;
 }
 
-.leading-\[4rem\] {
-  line-height: 4rem;
-}
-
-.leading-\[6rem\] {
-  line-height: 6rem;
+.italic {
+  font-style: italic;
 }
 
 .text-white {
@@ -493,6 +498,96 @@ header {
 
 .section-3 .heading span {
   display: inline-block;
+}
+
+.section-3 .image-grid {
+  width: 100%;
+  gap: 40px;
+  padding: 0 6rem;
+}
+
+.section-3 .image-grid .grid-item {
+  padding: 40px;
+  position: relative;
+}
+
+.section-3 .image-grid .grid-item img {
+  background-color: #222;
+}
+
+.section-3 .image-grid .grid-item .grid-item--description {
+  z-index: 1;
+  position: relative;
+}
+
+.section-3 .image-grid .grid-item .grid-item--description h3 {
+  margin-bottom: 8px;
+  font-size: 32px;
+  line-height: 38.4px;
+}
+
+.section-3 .image-grid .grid-item .grid-item--description p {
+  opacity: .5;
+  max-width: 450px;
+  text-wrap: balance;
+  line-height: 27px;
+}
+
+.section-3 .image-grid .grid-item.grid-item__full {
+  height: 720px;
+  grid-column: span 2 / span 2;
+  align-items: flex-end;
+  display: flex;
+}
+
+.section-3 .image-grid .grid-item.grid-item__full img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: bottom;
+  position: absolute;
+  inset: 0;
+}
+
+.section-3 .image-grid .grid-item.grid-item__half {
+  flex-direction: column;
+  grid-column: span 1 / span 1;
+  gap: 20px;
+  padding: 0;
+  display: flex;
+}
+
+section.prefooter {
+  height: 80vh;
+  background-color: #222;
+  background-image: url("prefooter.08088e0c.png");
+  background-size: cover;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 0 52px 48px;
+  display: flex;
+}
+
+section.prefooter h1 {
+  color: #fff;
+  font-size: 246px;
+  line-height: 246px;
+}
+
+section.prefooter div {
+  border-top: 1px solid #fff;
+  padding-top: 24px;
+}
+
+section.prefooter div p {
+  color: #fff;
+  font-size: 48px;
+  line-height: 120%;
+}
+
+footer {
+  background-color: #000;
+  padding: 80px 56px;
 }
 
 /*# sourceMappingURL=index.e378193d.css.map */

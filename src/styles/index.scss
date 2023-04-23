@@ -100,4 +100,99 @@ header {
   .heading span {
     display: inline-block;
   }
+
+  .image-grid {
+    padding: 0 6rem;
+    gap: 40px;
+    width: 100%;
+
+    .grid-item {
+      position: relative;
+      padding: 40px;
+
+      img {
+        background-color: #222222;
+      }
+
+      .grid-item--description {
+        z-index: 1;
+        position: relative;
+
+        h3 {
+          font-size: 32px;
+          line-height: 38.4px;
+          margin-bottom: 8px;
+        }
+
+        p {
+          // font-size: 18px;
+          line-height: 27px;
+          opacity: 0.5;
+          max-width: 450px;
+          text-wrap: balance;
+        }
+      }
+
+      &.grid-item__full {
+        grid-column: span 2 / span 2;
+        display: flex;
+        align-items: flex-end;
+        height: 720px;
+
+        img {
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          object-position: bottom;
+        }
+      }
+
+      &.grid-item__half {
+        grid-column: span 1 / span 1;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+    }
+  }
+}
+
+
+section.prefooter {
+  padding: 0px 52px 48px 52px;
+  background-color: #222222;
+  background-image: url(/assets/images/prefooter.png);
+  background-size: cover;
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  h1 {
+    font-size: 246px;
+    line-height: 246px;
+    color: white;
+  }
+
+  div {
+    border-top: 1px solid white;
+    padding-top: 24px;
+
+    p {
+      font-size: 48px;
+      line-height: 120%;
+      color: white;
+    }
+  }
+}
+
+footer {
+  background-color: black;
+  padding: 80px 56px;
 }

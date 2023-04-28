@@ -2,9 +2,10 @@
   "name": "commute",
   "version": "1.0.0",
   "description": "Landing page for a motorbike company",
-  "main": "index.js",
+  "source": "src/index.html",
   "scripts": {
-    "start": "parcel src/index.html"
+    "dev": "parcel",
+    "build": "parcel build"
   },
   "repository": "https://github.com/jeremiahjacinth13/commute-landing-page",
   "author": "Jeremiah Lena",

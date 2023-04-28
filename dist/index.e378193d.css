@@ -776,8 +776,8 @@ section.prefooter div p {
 
 .section-4 .background-marquee h1 {
   gap: 40px;
-  font-size: 226px;
-  line-height: 190px;
+  font-size: 25vh;
+  line-height: 20vh;
   display: flex;
 }
 

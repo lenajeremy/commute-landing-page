@@ -204,8 +204,8 @@ section.prefooter {
     right: 0;
 
     h1 {
-      font-size: 226px;
-      line-height: 190px;
+      font-size: 25vh;
+      line-height: 20vh;
       display: flex;
       gap: 40px;
 
@@ -245,10 +245,4 @@ footer {
       color: #505050;
     }
   }
-}
-
-
-h1 {
-  color: red;
-  font-size: 56px;
 }

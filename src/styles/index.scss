@@ -13,8 +13,39 @@
   --hero-gradient-color-2: #484848;
 }
 
+.cursor {
+  position: fixed;
+  z-index: 999;
+  width: 24px;
+  aspect-ratio: 1/1;
+  border-radius: 50%;
+  pointer-events: none;
+  backdrop-filter: invert(1);
+
+}
+
 body {
   font-size: 16px;
+
+  &.not-loaded {
+    > .loader {
+      display: block;
+    }
+
+    > .main-page {
+      display: none;
+    }
+  }
+
+  &:not(.not-loaded) {
+    > .loader {
+      display: none;
+    }
+
+    > .main-page {
+      display: block;
+    }
+  }
 }
 
 .text-balance {
@@ -38,7 +69,7 @@ header {
   position: relative;
   height: 100vh;
   width: 100vw;
-  background-image: url(/assets/images/hero-background.png),
+  background-image: url(https://res.cloudinary.com/dln2fgjqx/image/upload/v1683623342/commute-landing-page/hero-background_thoizn.png),
     linear-gradient(
       to bottom,
       var(--hero-gradient-color-1),
@@ -192,7 +223,6 @@ section.prefooter {
 }
 
 .section-4 {
-  
   position: relative;
   z-index: 1;
 
@@ -202,10 +232,12 @@ section.prefooter {
     left: 0;
     bottom: 0;
     right: 0;
+    width: 100%;
+    overflow: hidden;
 
     h1 {
       font-size: 25vh;
-      line-height: 20vh;
+      line-height: 19vh;
       display: flex;
       gap: 40px;
 
@@ -229,7 +261,35 @@ section.prefooter {
     width: 426px;
     position: relative;
 
-    background-color: #FE610B;
+    img.gallery-item {
+      object-fit: cover;
+    }
+
+    .gallery-item {
+      --rotate-deg: -2.5eg;
+      height: 100%;
+      width: 100%;
+      transform: rotate(var(--rotate-deg));
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+
+      &:nth-child(2) {
+        background-color: blueviolet;
+        --rotate-deg: 5deg;
+      }
+
+      &:nth-child(3) {
+        background-color: #fe610b;
+        --rotate-deg: -6deg;
+      }
+
+      &.active {
+        --rotate-deg: 0deg;
+      }
+    }
   }
 }
 

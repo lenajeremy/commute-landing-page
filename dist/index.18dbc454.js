@@ -142,13 +142,13 @@
       this[globalName] = mainExports;
     }
   }
-})({"e11Rl":[function(require,module,exports) {
+})({"9tRox":[function(require,module,exports) {
 var global = arguments[3];
 var HMR_HOST = null;
 var HMR_PORT = null;
 var HMR_SECURE = false;
 var HMR_ENV_HASH = "d6ea1d42532a7575";
-module.bundle.HMR_BUNDLE_ID = "bed887d14d6bcbeb";
+module.bundle.HMR_BUNDLE_ID = "0bcb44a518dbc454";
 "use strict";
 /* global HMR_HOST, HMR_PORT, HMR_ENV_HASH, HMR_SECURE, chrome, browser, globalThis, __parcel__import__, __parcel__importScripts__, ServiceWorkerGlobalScope */ /*::
 import type {
@@ -556,58 +556,158 @@ function hmrAccept(bundle, id) {
     });
 }
 
-},{}],"gLLPy":[function(require,module,exports) {
+},{}],"1SICI":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 var _utils = require("./utils");
 var _gsap = require("gsap");
 var _gsapDefault = parcelHelpers.interopDefault(_gsap);
 var _scrollTrigger = require("gsap/ScrollTrigger");
 var _scrollTriggerDefault = parcelHelpers.interopDefault(_scrollTrigger);
-(0, _utils.setupLenis)();
+var _cursor = require("./cursor");
+var _cursorDefault = parcelHelpers.interopDefault(_cursor);
 (0, _gsapDefault.default).registerPlugin((0, _scrollTriggerDefault.default));
-const tl = (0, _gsapDefault.default).timeline();
-tl.from(".hero h3 span", {
-    opacity: 0,
-    y: -30,
-    stagger: 0.25
+let galleryBackButton = document.querySelector(".button-back");
+let galleryForwardButton = document.querySelector(".button-forward");
+let galleryItems = document.querySelectorAll(".gallery-item");
+let galleryContainer = document.querySelector(".gallery-main");
+let activeGalleryItemIndex = galleryItems.length - 1;
+galleryBackButton.addEventListener("click", ()=>{
+    const tl = (0, _gsapDefault.default).timeline();
+    const currentActiveElement = galleryItems[activeGalleryItemIndex];
+    //   ar.unshift(ar[ar.length - 1]);
+    // ar = ar.slice(0, 4)
+    tl.to(currentActiveElement, {
+        rotate: "-270deg",
+        x: -1000,
+        opacity: 0.5,
+        scale: 0.3,
+        onComplete: ()=>{
+            // currentActiveElement.remove()
+            galleryItems.unshift(ar[ar.length - 1]);
+            galleryItems = galleryItems.slice(0, 4);
+            // clone the galleryContainer
+            const newGalleryContainerNode = document.cloneNode(galleryContainer);
+            // clear all the children in the cloned container
+            newGalleryContainerNode.childNodes.forEach((node)=>node.remove());
+            // add the rearranged children to the cloned gallery container
+            galleryItems.forEach((child)=>newGalleryContainerNode.appendChild(child));
+            document.replaceChild(galleryContainer, newGalleryContainerNode);
+            alert("replaced");
+        }
+    });
 });
-tl.from(".hero button", {
-    opacity: 0,
-    duration: 1
+galleryForwardButton.addEventListener("click", ()=>{
+    const tl = (0, _gsapDefault.default).timeline();
+    //   ar.unshift(ar[ar.length - 1]);
+    // ar = ar.slice(0, 4)
+    tl.to(galleryItems[activeGalleryItemIndex], {
+        rotate: "270deg",
+        x: 1000,
+        opacity: 0.5,
+        scale: 0.3
+    });
 });
-(0, _gsapDefault.default).to(".hero", {
-    scrollTrigger: {
-        scrub: true,
-        trigger: ".hero",
-        start: "top"
-    },
-    backgroundPosition: "0px 300px"
-});
-(0, _gsapDefault.default).to(".commute-text-container", {
-    scrollTrigger: {
-        scrub: true,
-        trigger: ".hero",
-        start: "top"
-    },
-    xPercent: "-50"
-});
-(0, _gsapDefault.default).to(".marquee", {
-    scrollTrigger: {
-        trigger: ".marquee",
-        pin: true
-    },
-    x: "-1155px",
-    repeat: -1,
-    duration: 10,
-    ease: "linear"
-});
+class Home {
+    constructor(){
+        this.loaderElement = document.querySelector(".loader");
+        this.mainContainerElement = document.querySelector(".main-page");
+        this.isLoaded = false;
+        this.tl = (0, _gsapDefault.default).timeline();
+        this.initializeScroll();
+        new (0, _cursorDefault.default)().initializeMovement();
+        this.loadAssets().then(()=>this.pageAnimations());
+    }
+    initializeScroll() {
+        (0, _utils.setupLenis)();
+    }
+    loadAssets() {
+        return (0, _utils.preloadImages)((progress)=>{
+            // this.loaderElement.querySelector(
+            //   '.absolute',
+            // ).innerHTML = `<h1 class = ' text-6xl text-center'>${progress
+            //   .toString()
+            //   .padStart(3, '0')}%</h1>`
+            this.tl.to(this.loaderElement.querySelector(".progress-container"), {
+                y: Math.floor(progress / 10) * -108,
+                duration: 1
+            });
+            if (progress === 100) {
+                this.tl.to(".loader .absolute h1", {
+                    opacity: 0,
+                    ease: "easeinout"
+                });
+                this.tl.to(".loader", {
+                    height: 0,
+                    opacity: 0,
+                    onComplete: ()=>document.body.classList.remove("not-loaded")
+                });
+            // document.body.classList.remove('not-loaded')
+            }
+        });
+    }
+    pageAnimations() {
+        this.tl.from(".hero h3 span", {
+            opacity: 0,
+            y: -30,
+            stagger: 0.25
+        });
+        this.tl.from(".hero button", {
+            opacity: 0,
+            duration: 1
+        });
+        this.tl.from("header", {
+            y: -20,
+            opacity: 0,
+            duration: 1
+        });
+        this.tl.to(".hero", {
+            scrollTrigger: {
+                scrub: true,
+                trigger: ".hero",
+                start: "top"
+            },
+            backgroundPosition: "0px 300px"
+        });
+        this.tl.to(".commute-text-container", {
+            scrollTrigger: {
+                scrub: true,
+                trigger: ".hero",
+                start: "top"
+            },
+            xPercent: "-50"
+        });
+        this.tl.to(".marquee", {
+            scrollTrigger: {
+                trigger: ".marquee",
+                pin: true
+            },
+            x: "-1155px",
+            repeat: -1,
+            duration: 10,
+            ease: "linear"
+        });
+        this.tl.from(".section-2 h3", {
+            opacity: 0,
+            duration: 1,
+            scrollTrigger: {
+                trigger: ".section-2",
+                start: "top 80%",
+                toggleActions: "restart none none none"
+            }
+        });
+    }
+}
+const home = new Home();
 
-},{"./utils":"en4he","gsap":"fPSuC","gsap/ScrollTrigger":"7wnFk","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"en4he":[function(require,module,exports) {
+},{"./utils":"72Dku","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./cursor":"3v1v0","gsap":"fPSuC","gsap/ScrollTrigger":"7wnFk"}],"72Dku":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "setupLenis", ()=>setupLenis);
+parcelHelpers.export(exports, "preloadImages", ()=>preloadImages);
 var _lenis = require("@studio-freight/lenis");
 var _lenisDefault = parcelHelpers.interopDefault(_lenis);
+var _assets = require("../../assets/assets");
+var _assetsDefault = parcelHelpers.interopDefault(_assets);
 function setupLenis() {
     let lenis = new (0, _lenisDefault.default)();
     function raf(time) {
@@ -616,8 +716,28 @@ function setupLenis() {
     }
     requestAnimationFrame(raf);
 }
+function preloadImages(updateProgress) {
+    const imageUrls = Object.values((0, _assetsDefault.default).images);
+    let imagesLoadedCount = 0;
+    const _updateProgress = ()=>{
+        imagesLoadedCount++;
+        let percentageCompleted = Math.floor(imagesLoadedCount / imageUrls.length * 100);
+        updateProgress(percentageCompleted);
+    };
+    return Promise.all(imageUrls.map((url)=>preloadImage(url, _updateProgress)));
+}
+function preloadImage(src, updateProgress) {
+    return new Promise((resolve)=>{
+        let image = new Image();
+        image.onload = ()=>{
+            updateProgress();
+            resolve();
+        };
+        image.src = src;
+    });
+}
 
-},{"@studio-freight/lenis":"ggVJc","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"ggVJc":[function(require,module,exports) {
+},{"@studio-freight/lenis":"ggVJc","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","../../assets/assets":"hXjq0"}],"ggVJc":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "default", ()=>l);
@@ -997,7 +1117,73 @@ exports.export = function(dest, destName, get) {
     });
 };
 
-},{}],"fPSuC":[function(require,module,exports) {
+},{}],"hXjq0":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+const assets = {
+    images: {
+        heroLargeBike: "https://res.cloudinary.com/dln2fgjqx/image/upload/v1683623342/commute-landing-page/hero-background_thoizn.png",
+        bikeTyreLarge: "https://res.cloudinary.com/dln2fgjqx/image/upload/v1683623342/commute-landing-page/bike-cycle_wxqjp7.png",
+        gridBikeLarge: "https://res.cloudinary.com/dln2fgjqx/image/upload/v1683623340/commute-landing-page/bike-full-image_ncysth.png",
+        gridBikeWithPhone: "https://res.cloudinary.com/dln2fgjqx/image/upload/v1683623341/commute-landing-page/phone_on_bike_nhymfr.png",
+        gridPeopleRidingBikes: "https://res.cloudinary.com/dln2fgjqx/image/upload/v1683623341/commute-landing-page/people_riding_a_bike_cknhsh.png",
+        joinTheRevolutionBike: "https://res.cloudinary.com/dln2fgjqx/image/upload/v1683623343/commute-landing-page/prefooter_rdwldg.png",
+        womanRidingBike: "https://res.cloudinary.com/dln2fgjqx/image/upload/v1683623340/commute-landing-page/bikescene_ckzero.png"
+    }
+};
+exports.default = assets;
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"3v1v0":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _gsap = require("gsap");
+var _gsapDefault = parcelHelpers.interopDefault(_gsap);
+class Cursor {
+    constructor(){
+        this.links = document.querySelector("a");
+        this.el = document.querySelector(".cursor");
+        this.lastButton = null;
+    }
+    initializeMovement() {
+        window.addEventListener("mousemove", (e)=>{
+            (0, _gsapDefault.default).to(this.el, {
+                x: e.clientX - 16,
+                y: e.clientY - 16,
+                ease: "easeout",
+                duration: 0.5
+            });
+            if (e.target.tagName === "BUTTON" || e.target.tagName === "A") {
+                (0, _gsapDefault.default).to(this.el, {
+                    scale: 3,
+                    opacity: 0.8
+                });
+                const targetBoundingRect = e.target.getBoundingClientRect();
+                const targetCenterX = targetBoundingRect.left + targetBoundingRect.width / 2;
+                const targetCenterY = targetBoundingRect.top + targetBoundingRect.height / 2;
+                if (e.target.tagName === "BUTTON") {
+                    this.lastButton = e.target;
+                    (0, _gsapDefault.default).to(this.lastButton, {
+                        x: (e.clientX - targetCenterX) / 3,
+                        y: (e.clientY - targetCenterY) / 3
+                    });
+                }
+            } else {
+                (0, _gsapDefault.default).to(this.el, {
+                    scale: 1,
+                    opacity: 1
+                });
+                this.lastButton && (0, _gsapDefault.default).to(this.lastButton, {
+                    x: 0,
+                    y: 0
+                });
+                this.lastButton = null;
+            }
+        });
+    }
+}
+exports.default = Cursor;
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","gsap":"fPSuC"}],"fPSuC":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "gsap", ()=>gsapWithCSS);
@@ -7118,6 +7304,6 @@ Observer.getById = function(id) {
 };
 _getGSAP() && gsap.registerPlugin(Observer);
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["e11Rl","gLLPy"], "gLLPy", "parcelRequire9b42")
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["9tRox","1SICI"], "1SICI", "parcelRequire9b42")
 
-//# sourceMappingURL=index.4d6bcbeb.js.map
+//# sourceMappingURL=index.18dbc454.js.map

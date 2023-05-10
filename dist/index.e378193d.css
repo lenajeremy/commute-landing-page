@@ -228,8 +228,62 @@ img, video {
   --tw-backdrop-sepia: ;
 }
 
+.container {
+  width: 100%;
+}
+
+@media (min-width: 640px) {
+  .container {
+    max-width: 640px;
+  }
+}
+
+@media (min-width: 768px) {
+  .container {
+    max-width: 768px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    max-width: 1024px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .container {
+    max-width: 1280px;
+  }
+}
+
+@media (min-width: 1536px) {
+  .container {
+    max-width: 1536px;
+  }
+}
+
+.absolute {
+  position: absolute;
+}
+
 .relative {
   position: relative;
+}
+
+.left-1\/2 {
+  left: 50%;
+}
+
+.top-1\/2 {
+  top: 50%;
+}
+
+.bottom-0 {
+  bottom: 0;
+}
+
+.left-0 {
+  left: 0;
 }
 
 .z-10 {
@@ -290,6 +344,18 @@ img, video {
   height: 80vh;
 }
 
+.h-screen {
+  height: 100vh;
+}
+
+.h-full {
+  height: 100%;
+}
+
+.h-\[108px\] {
+  height: 108px;
+}
+
 .min-h-screen {
   min-height: 100vh;
 }
@@ -324,6 +390,16 @@ img, video {
 
 .flex-1 {
   flex: 1;
+}
+
+.-translate-x-1\/2 {
+  --tw-translate-x: -50%;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
+.-translate-y-1\/2 {
+  --tw-translate-y: -50%;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
 .grid-cols-2 {
@@ -390,6 +466,10 @@ img, video {
   overflow: hidden;
 }
 
+.overflow-clip {
+  overflow: clip;
+}
+
 .rounded-3xl {
   border-radius: 1.5rem;
 }
@@ -439,6 +519,20 @@ img, video {
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
 
+.bg-red-300 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(252 165 165 / var(--tw-bg-opacity));
+}
+
+.bg-red-400 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(248 113 113 / var(--tw-bg-opacity));
+}
+
+.p-10 {
+  padding: 2.5rem;
+}
+
 .px-14 {
   padding-left: 3.5rem;
   padding-right: 3.5rem;
@@ -479,6 +573,11 @@ img, video {
   padding-bottom: 7rem;
 }
 
+.py-6 {
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+}
+
 .py-8 {
   padding-top: 2rem;
   padding-bottom: 2rem;
@@ -513,11 +612,6 @@ img, video {
   line-height: 2rem;
 }
 
-.text-3xl {
-  font-size: 1.875rem;
-  line-height: 2.25rem;
-}
-
 .text-4xl {
   font-size: 2.25rem;
   line-height: 2.5rem;
@@ -541,6 +635,11 @@ img, video {
 .text-sm {
   font-size: .875rem;
   line-height: 1.25rem;
+}
+
+.text-6xl {
+  font-size: 3.75rem;
+  line-height: 1;
 }
 
 .font-bold {
@@ -587,6 +686,10 @@ img, video {
   opacity: .5;
 }
 
+.opacity-70 {
+  opacity: .7;
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -598,8 +701,31 @@ img, video {
   --hero-gradient-color-2: #484848;
 }
 
+.cursor {
+  z-index: 999;
+  width: 24px;
+  aspect-ratio: 1 / 1;
+  pointer-events: none;
+  -webkit-backdrop-filter: invert();
+  backdrop-filter: invert();
+  border-radius: 50%;
+  position: fixed;
+}
+
 body {
   font-size: 16px;
+}
+
+body.not-loaded > .loader {
+  display: block;
+}
+
+body.not-loaded > .main-page, body:not(.not-loaded) > .loader {
+  display: none;
+}
+
+body:not(.not-loaded) > .main-page {
+  display: block;
 }
 
 .text-balance {
@@ -620,7 +746,7 @@ header {
 .hero {
   height: 100vh;
   width: 100vw;
-  background-image: url("hero-background.91cad4d1.png"), linear-gradient(to bottom, var(--hero-gradient-color-1), var(--hero-gradient-color-2));
+  background-image: url("https://res.cloudinary.com/dln2fgjqx/image/upload/v1683623342/commute-landing-page/hero-background_thoizn.png"), linear-gradient(to bottom, var(--hero-gradient-color-1), var(--hero-gradient-color-2));
   background-position: 0 0;
   background-size: cover;
   padding-top: 70px;
@@ -770,14 +896,16 @@ section.prefooter div p {
 }
 
 .section-4 .background-marquee {
+  width: 100%;
   position: absolute;
   inset: 0;
+  overflow: hidden;
 }
 
 .section-4 .background-marquee h1 {
   gap: 40px;
   font-size: 25vh;
-  line-height: 20vh;
+  line-height: 19vh;
   display: flex;
 }
 
@@ -800,8 +928,34 @@ section.prefooter div p {
 .section-4 .gallery-main {
   height: 561px;
   width: 426px;
-  background-color: #fe610b;
   position: relative;
+}
+
+.section-4 .gallery-main img.gallery-item {
+  object-fit: cover;
+}
+
+.section-4 .gallery-main .gallery-item {
+  --rotate-deg: -2.5eg;
+  height: 100%;
+  width: 100%;
+  transform: rotate(var(--rotate-deg));
+  position: absolute;
+  inset: 0;
+}
+
+.section-4 .gallery-main .gallery-item:nth-child(2) {
+  --rotate-deg: 5deg;
+  background-color: #8a2be2;
+}
+
+.section-4 .gallery-main .gallery-item:nth-child(3) {
+  --rotate-deg: -6deg;
+  background-color: #fe610b;
+}
+
+.section-4 .gallery-main .gallery-item.active {
+  --rotate-deg: 0deg;
 }
 
 footer {

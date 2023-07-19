@@ -270,20 +270,20 @@ img, video {
   position: relative;
 }
 
-.left-1\/2 {
-  left: 50%;
-}
-
-.top-1\/2 {
-  top: 50%;
-}
-
 .bottom-0 {
   bottom: 0;
 }
 
 .left-0 {
   left: 0;
+}
+
+.left-1\/2 {
+  left: 50%;
+}
+
+.top-1\/2 {
+  top: 50%;
 }
 
 .z-10 {
@@ -340,20 +340,20 @@ img, video {
   height: 6rem;
 }
 
-.h-\[80vh\] {
-  height: 80vh;
+.h-\[108px\] {
+  height: 108px;
 }
 
-.h-screen {
-  height: 100vh;
+.h-\[80vh\] {
+  height: 80vh;
 }
 
 .h-full {
   height: 100%;
 }
 
-.h-\[108px\] {
-  height: 108px;
+.h-screen {
+  height: 100vh;
 }
 
 .min-h-screen {
@@ -519,16 +519,6 @@ img, video {
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
 
-.bg-red-300 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(252 165 165 / var(--tw-bg-opacity));
-}
-
-.bg-red-400 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(248 113 113 / var(--tw-bg-opacity));
-}
-
 .p-10 {
   padding: 2.5rem;
 }
@@ -622,6 +612,11 @@ img, video {
   line-height: 1;
 }
 
+.text-6xl {
+  font-size: 3.75rem;
+  line-height: 1;
+}
+
 .text-9xl {
   font-size: 8rem;
   line-height: 1;
@@ -635,11 +630,6 @@ img, video {
 .text-sm {
   font-size: .875rem;
   line-height: 1.25rem;
-}
-
-.text-6xl {
-  font-size: 3.75rem;
-  line-height: 1;
 }
 
 .font-bold {
@@ -686,10 +676,6 @@ img, video {
   opacity: .5;
 }
 
-.opacity-70 {
-  opacity: .7;
-}
-
 * {
   box-sizing: border-box;
   margin: 0;
@@ -699,6 +685,10 @@ img, video {
 :root {
   --hero-gradient-color-1: #292929;
   --hero-gradient-color-2: #484848;
+}
+
+button * {
+  pointer-events: none;
 }
 
 .cursor {
@@ -759,6 +749,7 @@ header {
 
 .hero .commute-text-container {
   z-index: 1;
+  pointer-events: none;
   gap: 50px;
   display: flex;
   position: absolute;
@@ -970,6 +961,94 @@ footer input {
 
 footer input::placeholder {
   color: #505050;
+}
+
+.splitting .word, .splitting .char {
+  display: inline-block;
+}
+
+.splitting .char {
+  position: relative;
+}
+
+.splitting .char:before, .splitting .char:after {
+  content: attr(data-char);
+  visibility: hidden;
+  -webkit-user-select: none;
+  user-select: none;
+  transition: inherit;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.splitting {
+  --word-center: calc((var(--word-total)  - 1) / 2);
+  --char-center: calc((var(--char-total)  - 1) / 2);
+  --line-center: calc((var(--line-total)  - 1) / 2);
+}
+
+.splitting .word {
+  --word-percent: calc(var(--word-index) / var(--word-total));
+  --line-percent: calc(var(--line-index) / var(--line-total));
+}
+
+.splitting .char {
+  --char-percent: calc(var(--char-index) / var(--char-total));
+  --char-offset: calc(var(--char-index)  - var(--char-center));
+  --distance: calc((var(--char-offset) * var(--char-offset)) / var(--char-center));
+  --distance-sine: calc(var(--char-offset) / var(--char-center));
+  --distance-percent: calc((var(--distance) / var(--char-center)));
+}
+
+.splitting.cells img {
+  width: 100%;
+  display: block;
+}
+
+@supports (display: grid ) {
+  .splitting.cells {
+    visibility: hidden;
+    background-size: cover;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .splitting .cell-grid {
+    background: inherit;
+    width: 100%;
+    height: 100%;
+    grid-template: repeat(var(--row-total), 1fr) / repeat(var(--col-total), 1fr);
+    display: grid;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  .splitting .cell {
+    background: inherit;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .splitting .cell-inner {
+    background: inherit;
+    visibility: visible;
+    width: calc(100% * var(--col-total));
+    height: calc(100% * var(--row-total));
+    left: calc(-100% * var(--col-index));
+    top: calc(-100% * var(--row-index));
+    position: absolute;
+  }
+
+  .splitting .cell {
+    --center-x: calc((var(--col-total)  - 1) / 2);
+    --center-y: calc((var(--row-total)  - 1) / 2);
+    --offset-x: calc(var(--col-index)  - var(--center-x));
+    --offset-y: calc(var(--row-index)  - var(--center-y));
+    --distance-x: calc((var(--offset-x) * var(--offset-x)) / var(--center-x));
+    --distance-y: calc((var(--offset-y) * var(--offset-y)) / var(--center-y));
+  }
 }
 
 /*# sourceMappingURL=index.e378193d.css.map */

@@ -13,6 +13,10 @@
   --hero-gradient-color-2: #484848;
 }
 
+button * {
+  pointer-events: none;
+}
+
 .cursor {
   position: fixed;
   z-index: 999;
@@ -21,7 +25,6 @@
   border-radius: 50%;
   pointer-events: none;
   backdrop-filter: invert(1);
-
 }
 
 body {
@@ -88,6 +91,7 @@ header {
     gap: 50px;
     bottom: 0;
     z-index: 1;
+    pointer-events: none;
 
     p {
       font-size: 264px;

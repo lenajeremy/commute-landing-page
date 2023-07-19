@@ -1,4 +1,16 @@
-const assets = {
+const isOffline = false;
+
+const assets = isOffline ? {
+  images: {
+    heroLargeBike: '/images/hero-background.png',
+    bikeTyreLarge: '/images/bike-cycle.png',
+    gridBikeLarge: '/images/bike-full-image.png',
+    gridBikeWithPhone: '/images/phone on bike.png',
+    gridPeopleRidingBikes: '/images/people_riding_a_bike.png',
+    joinTheRevolutionBike: '/images/prefooter.png',
+    womanRidingBike: '/images/bikescene.png'
+  }
+} : {
   images: {
     heroLargeBike:
       'https://res.cloudinary.com/dln2fgjqx/image/upload/v1683623342/commute-landing-page/hero-background_thoizn.png',

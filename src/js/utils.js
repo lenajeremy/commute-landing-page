@@ -21,6 +21,7 @@ export function preloadImages(updateProgress) {
     let percentageCompleted = Math.floor(
       (imagesLoadedCount / imageUrls.length) * 100,
     )
+    console.log(percentageCompleted)
     updateProgress(percentageCompleted)
   }
 

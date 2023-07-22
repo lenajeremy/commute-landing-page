@@ -792,10 +792,6 @@ header {
   display: flex;
 }
 
-.section-3 .heading span {
-  display: inline-block;
-}
-
 .section-3 .image-grid {
   width: 100%;
   gap: 40px;

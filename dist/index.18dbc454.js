@@ -698,11 +698,6 @@ class Home {
             y: 400,
             ease: "easein"
         });
-        const results = (0, _splittingDefault.default)({
-            target: ".section-3 h3",
-            by: "chars"
-        });
-        // console.log(results)
         this.tl.to(".background-marquee h1:nth-of-type(1)", {
             x: -400,
             duration: 10,
@@ -714,6 +709,63 @@ class Home {
     }
 }
 const home = new Home();
+const gridHeading = (0, _splittingDefault.default)({
+    target: ".section-3 .heading",
+    by: "words"
+})[0];
+(0, _gsapDefault.default).fromTo(gridHeading.words, {
+    opacity: 0,
+    y: 50
+}, {
+    scrollTrigger: {
+        trigger: ".section-3",
+        start: "top 500px",
+        end: "50px +100px",
+        toggleActions: "restart none reverse none"
+    },
+    opacity: 1,
+    y: 0,
+    stagger: 0.15
+});
+const gridItemTitles = (0, _splittingDefault.default)({
+    target: ".grid-item h3",
+    by: "words"
+});
+const gridItemDescriptions = (0, _splittingDefault.default)({
+    target: ".grid-item p",
+    by: "words"
+});
+gridItemTitles.forEach((title)=>{
+    (0, _gsapDefault.default).fromTo(title.words, {
+        opacity: 0,
+        y: 50
+    }, {
+        scrollTrigger: {
+            trigger: title.el,
+            start: "top 700px",
+            toggleActions: "restart none none reverse"
+        },
+        opacity: 1,
+        y: 0,
+        stagger: 0.2
+    });
+});
+gridItemDescriptions.forEach((description)=>{
+    (0, _gsapDefault.default).fromTo(description.words, {
+        opacity: 0,
+        y: 50
+    }, {
+        scrollTrigger: {
+            trigger: description.el,
+            start: "top 700px",
+            toggleActions: "restart none none reverse"
+        },
+        opacity: 1,
+        y: 0,
+        stagger: 0.1,
+        delay: 0.5
+    });
+});
 
 },{"./utils":"72Dku","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./cursor":"3v1v0","gsap":"fPSuC","gsap/ScrollTrigger":"7wnFk","./splitting":"d0drb"}],"72Dku":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
@@ -1177,7 +1229,7 @@ class Cursor {
             (0, _gsapDefault.default).to(this.el, {
                 x: e.clientX - 16,
                 y: e.clientY - 16,
-                ease: "easeout",
+                ease: "easein",
                 duration: 0.5
             });
             if (e.target.tagName === "BUTTON" || e.target.tagName === "A") {

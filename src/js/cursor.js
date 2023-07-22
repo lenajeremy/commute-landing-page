@@ -12,7 +12,7 @@ class Cursor {
       gsap.to(this.el, {
         x: e.clientX - 16,
         y: e.clientY - 16,
-        ease: 'easeout',
+        ease: 'easein',
         duration: 0.5,
       })
 

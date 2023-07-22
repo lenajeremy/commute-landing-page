@@ -2,7 +2,7 @@ import { preloadImages, setupLenis } from "./utils";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import Cursor from "./cursor";
-import Splitting from './splitting'
+import Splitting from "./splitting";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -144,13 +144,6 @@ class Home {
       ease: "easein",
     });
 
-    const results = Splitting({
-      target: '.section-3 h3',
-      by: 'chars'
-    });
-
-    // console.log(results)
-
     this.tl.to(".background-marquee h1:nth-of-type(1)", {
       x: -400,
       duration: 10,
@@ -163,3 +156,78 @@ class Home {
 }
 
 const home = new Home();
+
+const gridHeading = Splitting({
+  target: ".section-3 .heading",
+  by: "words",
+})[0];
+
+gsap.fromTo(
+  gridHeading.words,
+  {
+    opacity: 0,
+    y: 50,
+  },
+  {
+    scrollTrigger: {
+      trigger: ".section-3",
+      start: "top 500px",
+      end: "50px +100px",
+      toggleActions: "restart none reverse none",
+    },
+    opacity: 1,
+    y: 0,
+    stagger: 0.15,
+  }
+);
+
+const gridItemTitles = Splitting({
+  target: ".grid-item h3",
+  by: "words",
+});
+
+const gridItemDescriptions = Splitting({
+  target: ".grid-item p",
+  by: "words",
+});
+
+gridItemTitles.forEach((title) => {
+  gsap.fromTo(
+    title.words,
+    {
+      opacity: 0,
+      y: 50,
+    },
+    {
+      scrollTrigger: {
+        trigger: title.el,
+        start: "top 700px",
+        toggleActions: "restart none none reverse",
+      },
+      opacity: 1,
+      y: 0,
+      stagger: 0.2,
+    }
+  );
+});
+
+gridItemDescriptions.forEach((description) => {
+  gsap.fromTo(
+    description.words,
+    {
+      opacity: 0,
+      y: 50,
+    },
+    {
+      scrollTrigger: {
+        trigger: description.el,
+        start: "top 700px",
+        toggleActions: "restart none none reverse",
+      },
+      opacity: 1,
+      y: 0,
+      stagger: 0.1,
+      delay: 0.5,
+    }
+  );
+});
